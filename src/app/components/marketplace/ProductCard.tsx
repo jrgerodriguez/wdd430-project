@@ -9,7 +9,7 @@ export default function ProductCard({ product }: Props) {
     <div className="w-full h-full flex flex-col shadow hover:shadow-lg transition bg-white/15 backdrop-blur-[15px]">
       <div className="relative w-full h-65">
         <Image
-          src={product.image_url}
+          src={product.image_url ?? "/images/placeholder.jpg"}
           alt={product.name}
           loading="lazy"
           fill
