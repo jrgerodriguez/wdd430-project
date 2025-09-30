@@ -12,7 +12,7 @@ export async function getAllProducts(): Promise<Product[]> {
 
 export async function getProductById(id: number): Promise<Product> {
   const { data, error } = await supabase
-    .from<Product>("product")
+    .from<Product, Product>("product")
     .select("*")
     .eq("id", id)
     .single();
