@@ -43,10 +43,10 @@ const About: React.FC = () => {
         <h2 className="text-3xl font-semibold mb-4 text-center">What Users Say</h2>
         <div className="flex flex-col md:flex-row gap-6 justify-center">
           <blockquote className="border-l-4 border-blue-500 pl-4 italic">
-            "I love this marketplace! I can buy and sell safely with trusted reviews."
+            I love this marketplace! I can buy and sell safely with trusted reviews.
           </blockquote>
           <blockquote className="border-l-4 border-blue-500 pl-4 italic">
-            "The team is responsive and the platform is very user-friendly."
+            The team is responsive and the platform is very user-friendly.
           </blockquote>
         </div>
       </section>
