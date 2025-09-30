@@ -3,10 +3,14 @@ import { Product } from "@/types/product";
 
 export async function getAllProducts(): Promise<Product[]> {
   const { data, error } = await supabase
-    .from("product") 
-    .select("*") as { data: Product[] | null; error: any }; 
+    .from("product")
+    .select("*") as { data: Product[] | null; error: unknown };
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(message);
+  }
+
   return data || [];
 }
 
@@ -15,8 +19,12 @@ export async function getProductById(id: number): Promise<Product> {
     .from("product")
     .select("*")
     .eq("id", id)
-    .single() as { data: Product | null; error: any };
+    .single() as { data: Product | null; error: unknown };
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(message);
+  }
+
   return data!;
 }
