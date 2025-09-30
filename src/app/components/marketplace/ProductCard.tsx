@@ -24,15 +24,15 @@ export default function ProductCard({ product }: Props) {
         <h2 className="mt-2 text-lg sm:text-xl md:text-2xl font-bold">
           {product.name}
         </h2>
-        <p className="text-gray-400 text-sm sm:text-base md:text-lg mt-1">
+        {/* <p className="text-gray-400 text-sm sm:text-base md:text-lg mt-1">
           {product.description}
-        </p>
+        </p> */}
         <p className="text-xl font-semibold text-[#FF6B35] py-2">
           ${product.price.toFixed(2)}
         </p>
 
         <Link
-          href={`/products/${product.id}`}
+          href={`/marketplace/${product.id}`}
           className="block text-center mt-auto px-4 py-2 bg-white/30 text-white font-bold hover:bg-white/40 transition"
         >
           See More Details
