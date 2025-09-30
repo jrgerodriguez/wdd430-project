@@ -3,7 +3,7 @@ import { Product } from "@/types/product";
 
 export async function getAllProducts(): Promise<Product[]> {
   const { data, error } = await supabase
-    .from<Product>("product")
+    .from<Product, Product>("product")
     .select("*");
 
   if (error) throw new Error(error.message);
