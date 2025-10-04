@@ -1,21 +1,35 @@
 'use client'
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 
-export default function RegisterForm() {
-  const router = useRouter();
+interface RegisterFormProps {
+  onSubmit: (data: { email: string; password: string }) => Promise<void>;
+}
 
-  const [showPassword, setShowPassword] = useState(false)
+export default function RegisterForm({ onSubmit }: RegisterFormProps) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      await onSubmit({ email, password });
+      setEmail("");
+      setPassword("");
+    } catch (err: any) {
+      alert(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const togglePassword = () => {
     setShowPassword(!showPassword)
-  }
- 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    router.push("/home")  
   }
 
   return(
@@ -29,7 +43,10 @@ export default function RegisterForm() {
               type="email"
               id="email"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="font-normal w-full px-4 py-2 rounded-md border border-white/30 bg-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
+              required
             />
           </div>
 
@@ -44,6 +61,8 @@ export default function RegisterForm() {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="font-normal w-full px-4 py-2 rounded-md border border-white/30 bg-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 pr-10"
               />
               <span onClick={togglePassword} id="togglePassword" className="absolute right-3 cursor-pointer flex items-center h-full">
@@ -80,10 +99,10 @@ export default function RegisterForm() {
 
           <div className="w-full">
             <button
-              type="submit"
+              type="submit" disabled={loading}
               className="w-full py-2 rounded-md bg-white/30 text-white font-bold hover:bg-white/40 cursor-pointer transition"
             >
-            CREATE USER
+            {loading ? "Creating..." : "CREATE USER"}
             </button>
           </div>
 
