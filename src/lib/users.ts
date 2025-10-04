@@ -2,17 +2,15 @@ import { supabase } from "@/lib/supabaseClient";
 import { User } from "@/types/user";
 
 export async function createNewUser(newUser: Omit<User, "id">): Promise<User> {
-
-  const {data, error} = await supabase 
-    .from<"user", Omit<User, "id">>("user")
-    .insert([newUser])
-    .select()
+  const { data, error } = await supabase
+    .from("user")               
+    .insert([newUser] as any)   
+    .select()                     
     .single();
-  
+
   if (error) {
-    throw new Error(error.message); 
+    throw new Error(error.message);
   }
 
-  return data!;
-
+  return data as User;          
 }
