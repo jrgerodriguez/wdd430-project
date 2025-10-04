@@ -3,12 +3,15 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import RegisterForm from "../components/register/RegisterForm";
+import toast from "react-hot-toast";
 
 
 export default function RegisterUser() {
   const router = useRouter();
 
   const handleRegister = async (formData: { email: string; password: string }) => {
+
+  try {
     const response = await fetch("/api/users", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -20,10 +23,15 @@ export default function RegisterUser() {
       throw new Error(errorData.error || "Failed to create user");
     }
 
-    alert("User Created Successfully.");
-    
+    toast.success("User created successfully 🎉");
     router.push("/home");
-
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("Something went wrong")
+      }
+    }
   };
 
   return(
