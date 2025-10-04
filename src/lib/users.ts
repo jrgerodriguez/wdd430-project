@@ -5,7 +5,7 @@ export async function createNewUser(newUser: Omit<User, "id">): Promise<User> {
   const { data, error } = await supabase
     .from("user")               
     .insert([newUser])   
-    .select<User>()                      
+    .select("id, email, password")                     
     .single();
 
   if (error) {
