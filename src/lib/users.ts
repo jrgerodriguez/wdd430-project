@@ -5,7 +5,7 @@ export async function createNewUser(newUser: Omit<User, "id">): Promise<User> {
   const { data, error } = await supabase
     .from("user")               
     .insert([newUser])   
-    .select("id, email, password")                     
+    .select("id, email, password, name, role")                     
     .single();
 
   if (error) {
@@ -13,4 +13,47 @@ export async function createNewUser(newUser: Omit<User, "id">): Promise<User> {
   }
 
   return data as User;          
+}
+
+export async function getAllUsers(): Promise<User[]> {
+  const { data, error } = await supabase
+    .from("user")
+    .select("*") as { data: User[] | null; error: unknown };
+
+  if (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(message);
+  }
+
+  return data || [];
+}
+
+export async function getUserById(id: number): Promise<User> {
+  const { data, error } = await supabase
+    .from("user")
+    .select("*")
+    .eq("id", id)
+    .single() as { data: User | null; error: unknown };
+
+  if (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(message);
+  }
+
+  return data!;
+}
+
+export async function updateUserStory(id: number, story: string): Promise<User> {
+  const { data, error } = await supabase
+    .from("user")
+    .update({ story })
+    .eq("id", id)
+    .select("*")
+    .single() as { data: User | null; error: unknown };
+
+  if (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(message);
+  }
+  return data!;
 }

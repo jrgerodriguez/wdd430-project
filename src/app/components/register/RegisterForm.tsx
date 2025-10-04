@@ -12,7 +12,7 @@ export default function RegisterForm() {
   const togglePassword = () => {
     setShowPassword(!showPassword)
   }
- 
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.push("/home")  
@@ -76,6 +76,18 @@ export default function RegisterForm() {
                 }
               </span>
             </div>
+          </div>
+
+          <div className="flex flex-col w-full">
+            <label htmlFor="name" className="mb-2 text-left text-white">
+              Name
+            </label>
+            <input
+              type="name"
+              id="name"
+              name="name"
+              className="font-normal w-full px-4 py-2 rounded-md border border-white/30 bg-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
+            />
           </div>
 
           <div className="w-full">
