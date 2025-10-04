@@ -7,3 +7,4 @@ export interface Product {
   image_url?: string;
   seller_id?: number;
 }
+
