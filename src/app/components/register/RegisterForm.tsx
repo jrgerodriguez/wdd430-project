@@ -21,8 +21,12 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
       await onSubmit({ email, password });
       setEmail("");
       setPassword("");
-    } catch (err: any) {
-      alert(err.message);
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+          alert(err.message);
+        } else {
+          alert(String(err));
+        }
     } finally {
       setLoading(false);
     }
