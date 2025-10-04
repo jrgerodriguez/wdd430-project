@@ -4,7 +4,7 @@ import { User } from "@/types/user";
 export async function createNewUser(newUser: Omit<User, "id">): Promise<User> {
 
   const {data, error} = await supabase 
-    .from<User, User>("user")
+    .from<User>("user")
     .insert([newUser])
     .select()
     .single();
