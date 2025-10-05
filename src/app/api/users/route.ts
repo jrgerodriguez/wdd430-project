@@ -3,22 +3,14 @@ import { createNewUser } from "@/lib/users";
 import { supabase } from "@/lib/supabaseClient";
 import { User } from "@/types/user";
 import { hashPassword } from "@/lib/auth";
+import { findUserByEmail } from "@/lib/users";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
+    const { email, password } = await request.json();
 
     // 1. Check if email already exists
-    const { data: existingUser, error: findError } = await supabase
-      .from("user")
-      .select("id")
-      .eq("email", body.email)
-      .single();
-
-    if (findError && findError.code !== "PGRST116") {
-      throw new Error(findError.message);
-    }
-
+    const existingUser = await findUserByEmail(email);
     if (existingUser) {
       return NextResponse.json(
         { error: "Email already registered" },
@@ -26,10 +18,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const hashedPassword = await hashPassword(body.password)
+    const hashedPassword = await hashPassword(password)
 
     const newUser = {
-    email: body.email,
+    email: email,
     password: hashedPassword,
     };
 
