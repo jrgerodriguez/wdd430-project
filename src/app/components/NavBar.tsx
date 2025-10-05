@@ -6,6 +6,17 @@ import Link from "next/link";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", {
+        method: "POST"
+      });
+      window.location.href= "/";
+    } catch (error) {
+      console.error("Logout failed:", error)
+    }
+  }
+
   return (
     <>
       <header className="w-full px-6 py-5 flex items-center justify-between relative bg-transparent">
@@ -23,6 +34,12 @@ export default function Navbar() {
             <li><Link href="/contact">Contact</Link></li>
           </ul>
         </nav>
+
+        <div className="font-bold z-10 hidden lg:flex">
+          <Link href="">
+            <span className="cursor-pointer" onClick={handleLogout}>Log Out</span>
+          </Link>
+        </div>
 
         <button
           className="lg:hidden flex flex-col gap-1 z-10"
@@ -44,6 +61,7 @@ export default function Navbar() {
             <li><Link href="/seller/products" onClick={() => setIsOpen(false)}>My Products</Link></li>
             <li><Link href="/about" onClick={() => setIsOpen(false)}>About</Link></li>
             <li><Link href="/contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
+            <li><span onClick={handleLogout}>Log Out</span></li>
           </ul>
         </nav>
       </div>
