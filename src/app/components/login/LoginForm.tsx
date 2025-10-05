@@ -3,19 +3,45 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
+import toast from "react-hot-toast";
+import MyToaster from "../ui/Toaster";
 
 export default function LoginForm() {
   const router = useRouter();
-
   const [showPassword, setShowPassword] = useState(false)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const togglePassword = () => {
     setShowPassword(!showPassword)
-  }
- 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  } 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push("/home")  
+    setLoading(true);
+
+    try {
+      const result = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({email, password})
+      })
+
+      const data = await result.json()
+
+      if(!result.ok) {
+        throw new Error(data.error || "Login failed")
+      }
+
+      toast.success(data.message)
+      router.push("/home")
+
+    } catch (error: unknown) {
+      if (error instanceof Error) toast.error(error.message)
+      else toast.error("Something went wrong");
+    } finally {
+      setLoading(false)
+    }
   }
 
   return(
@@ -29,7 +55,10 @@ export default function LoginForm() {
               type="email"
               id="email"
               name="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               className="font-normal w-full px-4 py-2 rounded-md border border-white/30 bg-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
+              required
             />
           </div>
 
@@ -44,7 +73,10 @@ export default function LoginForm() {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
                 className="font-normal w-full px-4 py-2 rounded-md border border-white/30 bg-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 pr-10"
+                required
               />
               <span onClick={togglePassword} id="togglePassword" className="absolute right-3 cursor-pointer flex items-center h-full">
                 {showPassword ? (
@@ -83,7 +115,7 @@ export default function LoginForm() {
               type="submit"
               className="w-full py-2 rounded-md bg-white/30 text-white font-bold hover:bg-white/40 cursor-pointer transition"
             >
-            LOG IN
+            {loading ? "Logging in..." : "LOG IN"}
             </button>
           </div>
 
