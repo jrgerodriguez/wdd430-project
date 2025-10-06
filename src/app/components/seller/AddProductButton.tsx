@@ -1,7 +1,9 @@
+'use client'
+
 import { User } from "@/types/user";
 import { useState } from "react";
 import { Product } from "@/types/product";
-import ProductForm from "./productForm";
+import ProductForm from "./ProductForm";
 
 type Props = {
     user: User;

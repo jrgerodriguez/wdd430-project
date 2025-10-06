@@ -1,6 +1,9 @@
+'use client'
+
 import { User } from "@/types/user";
 import { useState } from "react";
 import { Product } from "@/types/product";
+import { AddProduct } from "@/lib/products";
 
 type Props = {
     user: User;
@@ -23,7 +26,7 @@ export default function productForm({ user, onAddProduct }: Props) {
         setIsSaving(true);
         setError("");
         try {
-            await onAddProduct({ name, description, category, price: Number(price), seller_id: user.user_id });
+            await onAddProduct({ name, description, category, price: Number(price), seller_id: user.id });
             setIsAdding(false);
             setName("");
             setDescription("");
@@ -102,4 +105,3 @@ export default function productForm({ user, onAddProduct }: Props) {
     </div>
     );
 }
-

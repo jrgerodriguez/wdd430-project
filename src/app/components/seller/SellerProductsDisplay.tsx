@@ -1,0 +1,12 @@
+import React from 'react';
+import ProductCard from '../marketplace/ProductCard';
+import { Product } from "@/types/product";
+
+// Use seller_id to filter products by this seller
+    <section className="w-full flex justify-center p-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 gap-10 w-full max-w-[1200px]">
+        {products.map((seller_id) => (
+            <ProductCard key={seller_id.seller_id} product={seller_id} />
+        ))}
+        </div>
+    </section>

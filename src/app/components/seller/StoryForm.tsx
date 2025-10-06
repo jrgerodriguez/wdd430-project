@@ -1,3 +1,5 @@
+'use client'
+
 import { User } from "@/types/user";
 import { useState } from "react";
 
