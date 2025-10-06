@@ -4,5 +4,5 @@ export interface User {
   password: string;
   name: string;
   role: 'admin' | 'user' | 'seller';
-  story: string;
+  story?: string;
 }

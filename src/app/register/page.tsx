@@ -1,16 +1,45 @@
-import RegisterForm from "../components/register/RegisterForm"
+'use client'
+
+import { useRouter } from "next/navigation";
+import RegisterForm from "../components/register/RegisterForm";
+import toast from "react-hot-toast";
 
 export default function RegisterUser() {
-  return(
-    <div className="h-screen flex justify-center items-center">
-      <div className="bg-white/10 backdrop-blur-[15px] border border-white/30 rounded-[12px] p-4 sm:p-6 shadow-[0_8px_32px_rgba(0,0,0,0.25)] w-full max-w-[400px] mx-4 sm:mx-0">
-        
-        <div className="text-xl font-bold z-10 text-center">
-            <p className="py-3">Create a new user</p> 
+  const router = useRouter();
 
-            <RegisterForm />
+  const handleRegister = async (formData: { email: string; password: string; string; name: string; role: 'user' }) => {
+    try {
+      const response = await fetch("/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to create user");
+      }
+
+      toast.success("User created successfully 🎉");
+      router.push("/home");
+    } catch (error: unknown) {
+      if (error instanceof Error) toast.error(error.message);
+      else toast.error("Something went wrong");
+    }
+  };
+
+  return (
+    <div className="h-screen flex justify-center items-center bg-black px-4 sm:px-6 lg:px-16">
+      <div className="bg-white/10 backdrop-blur-[15px] p-6 sm:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.25)] w-full max-w-md mx-auto">
+        
+        <div className="text-center mb-6 font-sans">
+          <h1 className="text-2xl sm:text-2xl md:text-2xl font-semibold text-white">
+            Create a New User
+          </h1>
         </div>
+
+        <RegisterForm onSubmit={handleRegister} />
       </div>
     </div>
-  )
+  );
 }
