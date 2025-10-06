@@ -7,10 +7,13 @@ import SellerProductsDisplay from '@/app/components/seller/SellerProductsDisplay
 export default async function SellerPage() {
     // get the seller id from the url
     const sellerId = 1; // replace with actual id from url
+    // fetch the seller data from the database
     const seller: User | null = await getUserById(sellerId);
+    // if no seller found, display an error message
     if (!seller) {
         return <div>Seller not found</div>;
     }
+    // display the seller's story and their products
     return (
         <div className="container mx-auto p-4">
             <div className="mb-8">
@@ -18,7 +21,6 @@ export default async function SellerPage() {
                 <p className="text-lg text-gray-600">{seller.story}</p>
             </div>
             <SellerProductsDisplay user={seller} />
-
         </div>
     );
 }

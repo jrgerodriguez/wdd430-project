@@ -5,16 +5,18 @@ import { getUserById, updateUserStory, updateUserRole } from "@/lib/users";
 import StoryForm from "../components/seller/StoryForm";
 import { revalidatePath } from "next/cache";
 import React from "react";
-import AddProductButton from "../components/seller/AddProductButton";
+import ProductForm from "../components/seller/ProductForm";
 import SellerProductsDisplay from "../components/seller/SellerProductsDisplay";
 
 export default async function SellersPage() {
     // Get user id from session or auth context
     const seller_id = 1; // NEED TO CHANGE BY LOGIC FOR LOGGED IN USER
-    // Get user role to ensure they are a seller
-    const userRole = "seller"; // NEED TO CHANGE BY LOGIC FOR LOGGED IN USER
     // Get information for the logged-in user
     const user: User = await getUserById(seller_id);
+    // Get user role to ensure they are a seller
+    const userRole = user.role;
+
+    // Handlers for updating story
     const handleSaveStory = async (updatedStory: string) => {
         try {
             await updateUserStory(seller_id, updatedStory);
@@ -24,6 +26,8 @@ export default async function SellersPage() {
         }
         revalidatePath("/seller");
     };
+
+    // Handler for adding a new product
     const handleAddProduct = async (newProduct: Omit<Product, "id" | "seller_id">) => {
         'use server';
         try {
@@ -34,6 +38,7 @@ export default async function SellersPage() {
         revalidatePath("/seller");
     }
 
+    // Handler for becoming a seller
     const handleBecomeSeller = async () => {
         "use server";
         try {
@@ -65,16 +70,17 @@ export default async function SellersPage() {
     );
 }
 
+    // If user is a seller, show the seller dashboard
     else
         return (
             <div className="min-h-screen bg-gradient-to-b from-purple-400 via-pink-500 to-red-500 text-white">
-    // New section for adding products and seller story
+    // Section for managing story and adding products
                 <section className="w-full flex flex-col items-center p-10 space-y-6">
                     <h1 className="text-4xl font-bold">Welcome, {user.name}</h1>
                     <StoryForm user={user} onSave={handleSaveStory} />
-                    <AddProductButton user={user} onAddProduct={handleAddProduct} />
+                    <ProductForm user={user} onAddProduct={handleAddProduct} />
                 </section>
-    // Use seller_id to filter products by this seller
+    // Section for displaying seller's products
                 <section className="w-full flex justify-center p-10">
                     <SellerProductsDisplay user={user} />
                 </section>

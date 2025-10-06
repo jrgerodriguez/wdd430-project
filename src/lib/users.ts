@@ -43,14 +43,19 @@ export async function getUserById(id: number): Promise<User> {
   return data!;
 }
 
+// Function to update user story
 export async function updateUserStory(id: number, story: string): Promise<User> {
+  // Validate story length
+  if (story.length > 500) {
+    throw new Error("Story cannot exceed 500 characters.");
+  }
+  // Update story in the database
   const { data, error } = await supabase
     .from("user")
     .update({ story })
     .eq("id", id)
     .select("*")
     .single() as { data: User | null; error: unknown };
-
   if (error) {
     const message = error instanceof Error ? error.message : String(error);
     throw new Error(message);
@@ -58,8 +63,9 @@ export async function updateUserStory(id: number, story: string): Promise<User> 
   return data!;
 }
 
-// New function to become a seller
+// Function to become a seller
 export async function updateUserRole(id: number, role: 'admin' | 'user' | 'seller'): Promise<User> {
+  // Update role in the database
   const { data, error } = await supabase
     .from("user")
     .update({ role })
