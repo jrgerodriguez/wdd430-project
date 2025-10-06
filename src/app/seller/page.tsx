@@ -1,18 +1,18 @@
-
-
 import { Product } from "@/types/product";
-import { getAllProducts, AddProduct } from "@/lib/products";
+import { AddProduct } from "@/lib/products";
 import { User } from "@/types/user";
 import { getUserById, updateUserStory } from "@/lib/users";
 import StoryForm from "../components/seller/StoryForm";
 import { revalidatePath } from "next/cache";
 import React from "react";
 import AddProductButton from "../components/seller/AddProductButton";
+import SellerProductsDisplay from "../components/seller/SellerProductsDisplay";
 
 export default async function SellersPage() {
-    const products: Product[] = await getAllProducts();
     // Get user id from session or auth context
     const seller_id = 1; // NEED TO CHANGE BY LOGIC FOR LOGGED IN USER
+    // Get the role of the user
+    const isSeller = "seller";
     // Get information for the logged-in user
     const user: User = await getUserById(seller_id);
     const handleSaveStory = async (updatedStory: string) => {
@@ -41,16 +41,7 @@ return (
         <h1 className="text-4xl font-bold">Welcome, {user.name}</h1>
         <StoryForm user={user} onSave={handleSaveStory} />
         <AddProductButton user={user} onAddProduct={handleAddProduct} />
-    </section>
-
-
-    // Use seller_id to filter products by this seller
-    <section className="w-full flex justify-center p-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 gap-10 w-full max-w-[1200px]">
-        {products.map((seller_id) => (
-            <ProductCard key={seller_id.seller_id} product={seller_id} />
-        ))}
-        </div>
+        <SellerProductsDisplay user={user} />
     </section>
     </div>
     );
