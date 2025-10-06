@@ -3,7 +3,6 @@
 import { User } from "@/types/user";
 import { useState } from "react";
 import { Product } from "@/types/product";
-import { AddProduct } from "@/lib/products";
 
 // Define the props for the component
 type Props = {
