@@ -57,3 +57,20 @@ export async function updateUserStory(id: number, story: string): Promise<User> 
   }
   return data!;
 }
+
+// New function to become a seller
+export async function updateUserRole(id: number, role: 'admin' | 'user' | 'seller'): Promise<User> {
+  const { data, error } = await supabase
+    .from("user")
+    .update({ role })
+    .eq("id", id)
+    .select("*")
+    .single() as { data: User | null; error: unknown };
+
+  if (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(message);
+  }
+  return data!;
+}
+  
