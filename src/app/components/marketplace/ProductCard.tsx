@@ -6,38 +6,45 @@ type Props = { product: Product };
 
 export default function ProductCard({ product }: Props) {
   return (
-    <div className="w-full h-full flex flex-col shadow hover:shadow-lg transition bg-white/15 backdrop-blur-[15px]">
-      <div className="relative w-full h-65">
+    <div className="w-full h-full flex flex-col rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 hover:scale-[1.02] bg-white/5 backdrop-blur-[20px] border border-white/10">
+      
+
+      <div className="relative w-full h-64">
         <Image
           src={product.image_url ?? "/images/placeholder.jpg"}
           alt={product.name}
-          loading="lazy"
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-700 hover:scale-105 brightness-90"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
       </div>
 
-      <div className="p-3 flex flex-col flex-1">
-        <p className="mt-1 text-[10px] text-gray-400">
+
+      <div className="p-5 flex flex-col flex-1 text-white font-sans">
+        <p className="text-[0.65rem] sm:text-[0.7rem] tracking-widest uppercase text-white/50 mb-1">
           {product.category.replace("_", " ")}
         </p>
-        <h2 className="mt-2 text-lg sm:text-xl md:text-2xl font-bold">
+
+        <h2 className="text-sm sm:text-[0.95rem] md:text-base font-light tracking-wide line-clamp-2">
           {product.name}
         </h2>
-        {/* <p className="text-gray-400 text-sm sm:text-base md:text-lg mt-1">
-          {product.description}
-        </p> */}
-        <p className="text-xl font-semibold text-[#FF6B35] py-2">
-          ${product.price.toFixed(2)}
-        </p>
 
-        <Link
-          href={`/marketplace/${product.id}`}
-          className="block text-center mt-auto px-4 py-2 bg-white/30 text-white font-bold hover:bg-white/40 transition"
-        >
-          See More Details
-        </Link>
+
+        <div className="mt-2 flex justify-between items-center">
+          <p className="text-[0.85rem] sm:text-sm font-semibold text-green-300 tracking-wide">
+            ${product.price.toFixed(2)}
+          </p>
+
+          <Link
+            href={`/marketplace/${product.id}`}
+            className="px-3 py-1 rounded-full border border-white/30 text-white/70 font-light text-[0.7rem] sm:text-[0.75rem] hover:text-white hover:border-white/50 transition-all tracking-wide"
+          >
+            See Details
+          </Link>
+        </div>
+
       </div>
+
     </div>
   );
 }
