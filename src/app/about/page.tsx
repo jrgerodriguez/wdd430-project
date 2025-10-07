@@ -18,7 +18,7 @@ const About: React.FC = () => {
         </p>
       </section>
 
-      <section className="bg-gray-100 p-8 rounded-lg">
+      <section className=" p-8 rounded-lg text-center">
         <h2 className="text-3xl font-semibold mb-4">Our Mission</h2>
         <p className="text-gray-700">
           Our mission is to empower individuals to trade with confidence. We ensure transparency, 
@@ -39,7 +39,7 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      <section className="bg-gray-50 p-8 rounded-lg">
+      <section className=" p-8 rounded-lg">
         <h2 className="text-3xl font-semibold mb-4 text-center">What Users Say</h2>
         <div className="flex flex-col md:flex-row gap-6 justify-center">
           <blockquote className="border-l-4 border-blue-500 pl-4 italic">

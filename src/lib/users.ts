@@ -15,6 +15,20 @@ export async function createNewUser(newUser: Omit<User, "id">): Promise<User> {
   return data as User;          
 }
 
+export async function findUserByEmail(email: string): Promise<User | null> {
+  const { data, error } = await supabase
+    .from("user")
+    .select("id, email, password")
+    .eq("email", email)
+    .single();  
+
+  if (error && error.code !== "PGRST116") { 
+    throw new Error(error.message);
+  }
+
+  return data as User | null;
+}
+
 export async function getAllUsers(): Promise<User[]> {
   const { data, error } = await supabase
     .from("user")
