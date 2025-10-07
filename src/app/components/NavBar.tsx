@@ -6,6 +6,17 @@ import Link from "next/link";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", {
+        method: "POST"
+      });
+      window.location.href= "/";
+    } catch (error) {
+      console.error("Logout failed:", error)
+    }
+  }
+
   return (
     <>
       <header className="w-full px-6 py-5 flex items-center justify-between relative bg-transparent">
@@ -16,13 +27,24 @@ export default function Navbar() {
         </div>
 
         <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2">
-          <ul className="flex gap-10">
+          <ul className="flex gap-10 font-sans text-[0.94rem] ">
             <li><Link href="/marketplace">Marketplace</Link></li>
-            <li><Link href="/my-products">My Products</Link></li>
+            {/* CHANGE LINK TO MATCH THE DIRECTORY */}
+            <li><Link href="/seller">My Products</Link></li>
             <li><Link href="/about">About</Link></li>
             <li><Link href="/contact">Contact</Link></li>
           </ul>
         </nav>
+
+        <div className="z-10 hidden lg:flex">
+          <button
+            onClick={handleLogout}
+            {/* CHANGE COLOR TO INCREASE CONTRAST */}
+            className="cursor-pointer font-sans text-[0.94rem] text-white/80 hover:text-white/90 transition-colors duration-200"
+          >
+            Sign Out
+          </button>
+        </div>
 
         <button
           className="lg:hidden flex flex-col gap-1 z-10"
@@ -39,11 +61,14 @@ export default function Navbar() {
         ${isOpen ? "max-h-96" : "max-h-0"}`}
       >
         <nav className="shadow-md border-t border-gray-300">
-          <ul className="flex flex-col items-start gap-4 text-white pl-6 py-4">
+          <ul className="flex flex-col items-start gap-4 text-white pl-6 py-4 font-sans text-[0.94rem]">
             <li><Link href="/marketplace" onClick={() => setIsOpen(false)}>Marketplace</Link></li>
-            <li><Link href="/seller/products" onClick={() => setIsOpen(false)}>My Products</Link></li>
+            {/* CHANGE LINK TO MATCH THE DIRECTORY */}
+            <li><Link href="/seller" onClick={() => setIsOpen(false)}>My Products</Link></li>
             <li><Link href="/about" onClick={() => setIsOpen(false)}>About</Link></li>
             <li><Link href="/contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
+            {/* CHANGE TO MATCH LINE 44*/}
+            <li><span onClick={handleLogout}>Sign Out</span></li>
           </ul>
         </nav>
       </div>

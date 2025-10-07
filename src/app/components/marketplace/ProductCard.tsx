@@ -21,7 +21,8 @@ export default function ProductCard({ product }: Props) {
 
 
       <div className="p-5 flex flex-col flex-1 text-white font-sans">
-        <p className="text-[0.65rem] sm:text-[0.7rem] tracking-widest uppercase text-white/50 mb-1">
+        {/* CHANGE THE COLOR TO TRY HAVE MORE CONTRAST */}
+        <p className="text-[0.65rem] sm:text-[0.7rem] tracking-widest uppercase text-white/80 mb-1">
           {product.category.replace("_", " ")}
         </p>
 
