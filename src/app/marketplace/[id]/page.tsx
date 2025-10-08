@@ -50,7 +50,7 @@ export default async function ProductDetailPage({ params }: Props) {
                     </div>
                 </div>
             </div>
-            <ProductReview productId={params.id} userId="user123" />
+            <ProductReview productId={params.id} />
         </section>
     );
 }
