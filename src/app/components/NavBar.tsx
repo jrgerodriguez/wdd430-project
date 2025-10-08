@@ -19,15 +19,15 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="w-full px-6 py-5 flex items-center justify-between relative bg-transparent">
-        <div className="text-xl font-bold z-10">
+      <header className="w-full px-6 py-6 flex items-center justify-between relative bg-transparent">
+        <div className="text-xl font-bold z-10 font-sans">
           <Link href="/home">
             <span className="text-3xl">H</span>ancrafted<span className="text-3xl">H</span>aven
           </Link>
         </div>
 
         <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2">
-          <ul className="flex gap-10 font-sans text-[0.94rem] ">
+          <ul className="flex gap-10 font-sans text-[0.94rem] text-white/50 ">
             <li><Link href="/marketplace">Marketplace</Link></li>
             <li><Link href="/my-products">My Products</Link></li>
             <li><Link href="/about">About</Link></li>
@@ -59,7 +59,7 @@ export default function Navbar() {
         ${isOpen ? "max-h-96" : "max-h-0"}`}
       >
         <nav className="shadow-md border-t border-gray-300">
-          <ul className="flex flex-col items-start gap-4 text-white pl-6 py-4 font-sans text-[0.94rem]">
+          <ul className="flex flex-col items-start gap-4 pl-6 py-4 font-sans text-[0.94rem] text-white/50">
             <li><Link href="/marketplace" onClick={() => setIsOpen(false)}>Marketplace</Link></li>
             <li><Link href="/seller/products" onClick={() => setIsOpen(false)}>My Products</Link></li>
             <li><Link href="/about" onClick={() => setIsOpen(false)}>About</Link></li>

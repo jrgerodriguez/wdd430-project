@@ -10,7 +10,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password } = await request.json();
+    const { first_name, last_name, email, password } = await request.json();
 
     // 1. Check if email already exists
     const existingUser = await findUserByEmail(email);
@@ -24,6 +24,8 @@ export async function POST(request: NextRequest) {
     const hashedPassword = await hashPassword(password)
 
     const newUser = {
+    first_name: first_name,
+    last_name: last_name,
     email: email,
     password: hashedPassword,
     };
@@ -31,7 +33,7 @@ export async function POST(request: NextRequest) {
     const createdUser = await createNewUser(newUser);
 
     //Generate JWT
-    const token = sign({ id: createdUser.id, email: createdUser.email }, JWT_SECRET, { expiresIn: "1h" });
+    const token = sign({ id: createdUser.id, first_name: createdUser.first_name, email: createdUser.email }, JWT_SECRET, { expiresIn: "1h" });
 
     // Create Answer and set cookie
     const response = NextResponse.json({ message: "User created successfully" }, { status: 201 });
