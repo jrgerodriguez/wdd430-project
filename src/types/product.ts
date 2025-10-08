@@ -13,5 +13,15 @@ export interface Product {
   price: number;
   image_url?: string;
   seller_id?: number;
+  averageRating?: number;
+  ratings?: Rating[];
 }
 
+export interface Rating {
+  id: string;
+  userId: string;
+  productId: string;
+  rating: number; // 1–5
+  comment?: string;
+  created_at?: string;
+}
