@@ -39,7 +39,7 @@ export default function Hero() {
                         Explore Marketplace
                     </Link>
                     <Link
-                        href="/seller/products"
+                        href="/my-products"
                        className="px-6 py-3 rounded-lg border border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-black hover:scale-105 hover:shadow-lg transition-all duration-300 font-sams text-[0.94rem] font-semibold"
                     >
                         My Products

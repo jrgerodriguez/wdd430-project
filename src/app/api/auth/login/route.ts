@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({error: "Invalid Password"}, {status: 401}) 
         } 
 
-        const token = sign({ id: user.id, email: user.email }, JWT_SECRET, {
+        const token = sign({ id: user.id, first_name: user.first_name, email: user.email }, JWT_SECRET, {
         expiresIn: "1h",
         });
 
