@@ -9,48 +9,42 @@ interface Rating {
   user_id: string;
 }
 
-export default function ProductReview({ productId }: { productId: string}) {
+export default function ProductReview({ productId }: { productId: string }) {
   const [rating, setRating] = useState(5);
   const [hover, setHover] = useState(0);
   const [comment, setComment] = useState("");
   const [reviews, setReviews] = useState<Rating[]>([]);
 
-
- useEffect(() => {
-  const fetchReviews = async () => {
-    const res = await fetch(`/api/rating?productId=${productId}`);
-    const data = await res.json();
-    
-    if (Array.isArray(data)) {
-      setReviews(data);
-    } else {
-      setReviews([]); 
-    }
-  };
-  fetchReviews();
-}, [productId]);
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const res = await fetch(`/api/rating?productId=${productId}`);
+      const data = await res.json();
+      setReviews(Array.isArray(data) ? data : []);
+    };
+    fetchReviews();
+  }, [productId]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     await fetch("/api/rating", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ comment, productId: Number(productId), rating }),
     });
-
     setComment("");
     setRating(0);
+
     const updated = await fetch(`/api/rating?productId=${productId}`).then(res => res.json());
     setReviews(Array.isArray(updated) ? updated : []);
   };
 
   return (
-    <div className="mt-8 border-t pt-4">
-      <h3 className="text-lg font-semibold mb-2">Rate this product</h3>
+    <div className="mt-8 border-t border-white/20 pt-6">
+      <h3 className="text-lg font-semibold mb-4 text-white">Rate this product</h3>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <div className="flex">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        {/* Stars */}
+        <div className="flex gap-2">
           {[1, 2, 3, 4, 5].map(star => (
             <button
               type="button"
@@ -58,32 +52,38 @@ export default function ProductReview({ productId }: { productId: string}) {
               onClick={() => setRating(star)}
               onMouseEnter={() => setHover(star)}
               onMouseLeave={() => setHover(0)}
-              className="text-2xl text-yellow-400"
+              className={`text-2xl transition-colors ${star <= (hover || rating) ? "text-yellow-400" : "text-white/40"}`}
             >
-              {star <= (hover || rating) ? "★" : "☆"}
+              ★
             </button>
           ))}
         </div>
 
+        {/* Comment Box */}
         <textarea
-          className="border rounded p-2 w-full"
+          className="border border-white/20 rounded p-3 w-full bg-white/5 text-white placeholder-white focus:outline-none focus:bg-white/10 transition"
           placeholder="Leave a comment..."
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
 
-        <button type="submit" className="bg-blue-600 text-white rounded px-4 py-2 w-fit hover:bg-blue-700">
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="bg-white/10 text-white rounded px-6 py-2 w-fit hover:bg-white/20 transition"
+        >
           Submit
         </button>
       </form>
 
-      <div className="mt-6">
-        <h4 className="font-semibold mb-2">User Reviews:</h4>
-        {reviews.length === 0 && <p>No reviews yet.</p>}
+      {/* Reviews List */}
+      <div className="mt-8">
+        <h4 className="font-semibold mb-4 text-white text-lg">User Reviews:</h4>
+        {reviews.length === 0 && <p className="text-white/40">No reviews yet.</p>}
         {reviews.map(r => (
-          <div key={r.id} className="border-b py-2">
-            <p className="text-yellow-500">{`★`.repeat(r.rating)}{`☆`.repeat(5 - r.rating)}</p>
-            <p className="text-sm">{r.comment}</p>
+          <div key={r.id} className="border-b border-white/20 py-3">
+            <p className="text-yellow-400 mb-1">{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</p>
+            <p className="text-white/70 text-sm">{r.comment}</p>
           </div>
         ))}
       </div>
