@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getProductById } from "@/lib/products";
 import { Product } from "@/types/product";
+import ProductReview from "@/app/components/marketplace/ProductReview";
 
 type Props = {
     params: { id: string }
@@ -49,6 +50,7 @@ export default async function ProductDetailPage({ params }: Props) {
                     </div>
                 </div>
             </div>
+            <ProductReview productId={params.id} />
         </section>
     );
 }
