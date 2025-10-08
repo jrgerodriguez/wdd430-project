@@ -9,8 +9,8 @@ interface Rating {
   user_id: string;
 }
 
-export default function ProductReview({ productId, userId }: { productId: string; userId: string }) {
-  const [rating, setRating] = useState(0);
+export default function ProductReview({ productId }: { productId: string}) {
+  const [rating, setRating] = useState(5);
   const [hover, setHover] = useState(0);
   const [comment, setComment] = useState("");
   const [reviews, setReviews] = useState<Rating[]>([]);
@@ -36,7 +36,7 @@ export default function ProductReview({ productId, userId }: { productId: string
     await fetch("/api/rating", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ productId, userId, rating, comment }),
+      body: JSON.stringify({ comment, productId: Number(productId), rating }),
     });
 
     setComment("");
