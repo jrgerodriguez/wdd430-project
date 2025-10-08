@@ -8,7 +8,7 @@ import ProductCard from "../components/marketplace/ProductCard";
 export default function MarketplacePage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [categoryFilter, setCategoryFilter] = useState<string>("all");
+  const [categoryFilter, setCategoryFilter] = useState<Category | "all">("all");
   const [maxPriceFilter, setMaxPriceFilter] = useState<number | "">("");
 
   useEffect(() => {
@@ -35,16 +35,15 @@ export default function MarketplacePage() {
     setFilteredProducts(filtered);
   }, [categoryFilter, maxPriceFilter, products]);
 
-  // obtendo lista única de categorias
-  const categories = Array.from(new Set(products.map(p => p.category))) as Category[];
-
+  const categories = ["Footwear", "Home Decor", "Clothing", "Bags", "Jewelry"];
+  
   return (
     <section className="w-full flex flex-col items-center p-10">
       <div className="flex flex-col sm:flex-row gap-4 mb-8">
         <select
           value={categoryFilter}
-          onChange={(e) => setCategoryFilter(e.target.value)}
-          className="px-3 py-2 rounded bg-white/5 text-white border border-white/20"
+          onChange={(e) => setCategoryFilter(e.target.value as Category | "all")}
+          className="px-3 py-2 rounded bg-white text-black border-white/20"
         >
           <option value="all">All Categories</option>
           {categories.map((cat) => (

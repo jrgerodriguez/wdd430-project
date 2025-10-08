@@ -1,9 +1,9 @@
 export type Category =
-  | "FOOTWEAR"  
-  | "HOME DECOR"
-  | "CLOTHING"
-  | "BAGS"
-  | "JEWELRY";
+  | "Footwear"  
+  | "Home Decor"
+  | "Clothing"
+  | "Bags"
+  | "Jewelry";
 
 export interface Product {
   id: number;
