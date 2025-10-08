@@ -22,6 +22,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     }
 
     const payload = verified as JwtPayloadCustom;
+    console.log(payload)
+
     const first_name = payload.first_name ?? "Seller";
 
     console.log(payload)
