@@ -19,7 +19,7 @@ export default function LandingPage() {
         <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center font-sans">
           <div className="text-center mb-6">
             <h1 className="text-2xl sm:text-2xl md:text-2xl font-semibold text-white">
-              Hancrafted Haven
+              Manage Your Store – Login
             </h1>
           </div>
 

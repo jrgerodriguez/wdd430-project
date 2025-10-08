@@ -31,7 +31,7 @@ export default function LoginForm() {
       if(!result.ok) throw new Error(data.error || "Login failed")
 
       toast.success(data.message)
-      router.push("/home")
+      router.push("/home")  // o "/seller" si quieres redirigir ahí
 
     } catch (error: unknown) {
       if (error instanceof Error) toast.error(error.message)
@@ -94,23 +94,21 @@ export default function LoginForm() {
         </div>
       </div>
 
-
+      {/* Submit Button */}
       <div className="w-full">
         <button
           type="submit"
-          className="w-full py-2 rounded-md bg-gradient-to-r from-gray-700 to-blue-gray-800 text-white hover:from-gray-600 hover:to-blue-gray-700 transition-all shadow-md cursor-pointer"
+          className="w-full py-2 rounded-md bg-gradient-to-r from-amber-600 to-amber-400 text-white hover:from-amber-500 hover:to-amber-300 transition-all shadow-md hover:shadow-lg cursor-pointer"
         >
           {loading ? "Signing in..." : "Sign in"}
         </button>
       </div>
-
 
       <div className="flex items-center mt-4">
         <hr className="flex-grow border-white/30" />
         <span className="mx-2 text-white/70 text-sm font-light">or</span>
         <hr className="flex-grow border-white/30" />
       </div>
-
 
       <div className="w-full mt-4 text-center">
         <Link

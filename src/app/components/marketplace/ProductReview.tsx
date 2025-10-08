@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
+import { Star } from "lucide-react";
 
 interface Rating {
   id: string;
-  name: string;
   rating: number;
   comment?: string;
   user_id: string;
@@ -39,54 +39,72 @@ export default function ProductReview({ productId }: { productId: string }) {
   };
 
   return (
-    <div className="mt-8 border-t border-white/20 pt-6">
-      <h3 className="text-lg font-semibold mb-4 text-white">Rate this product</h3>
-
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {/* Stars */}
-        <div className="flex gap-2">
-          {[1, 2, 3, 4, 5].map(star => (
-            <button
-              type="button"
-              key={star}
-              onClick={() => setRating(star)}
-              onMouseEnter={() => setHover(star)}
-              onMouseLeave={() => setHover(0)}
-              className={`text-2xl transition-colors ${star <= (hover || rating) ? "text-yellow-400" : "text-white/40"}`}
-            >
-              ★
-            </button>
-          ))}
-        </div>
-
-        {/* Comment Box */}
-        <textarea
-          className="border border-white/20 rounded p-3 w-full bg-white/5 text-white placeholder-white focus:outline-none focus:bg-white/10 transition"
-          placeholder="Leave a comment..."
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="bg-white/10 text-white rounded px-6 py-2 w-fit hover:bg-white/20 transition"
-        >
-          Submit
-        </button>
-      </form>
+    <section className="text-white font-sans mt-10">
+      {/* Reviews Division */}
+      <h2 className="text-1xl md:text-xl font-light mb-6 border-b border-white/20 pb-2 text-white/70">
+        Reviews
+      </h2>
 
       {/* Reviews List */}
-      <div className="mt-8">
-        <h4 className="font-semibold mb-4 text-white text-lg">User Reviews:</h4>
+      <div className="space-y-6 mb-6">
         {reviews.length === 0 && <p className="text-white/40">No reviews yet.</p>}
         {reviews.map(r => (
-          <div key={r.id} className="border-b border-white/20 py-3">
-            <p className="text-yellow-400 mb-1">{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</p>
-            <p className="text-white/70 text-sm">{r.comment}</p>
+          <div key={r.id} className="bg-white/5 p-5 backdrop-blur-sm border border-white/10 hover:border-white/30 transition-all">
+            <div className="flex items-center gap-1 mb-3">
+              {[1,2,3,4,5].map(star => (
+                <Star
+                  key={star}
+                  className={`w-4 h-4 ${
+                    star <= r.rating ? "text-white/80 fill-white/80" : "text-white/40"
+                  }`}
+                />
+              ))}
+            </div>
+            <p className="text-white text-[0.94rem]">{r.comment}</p>
           </div>
         ))}
       </div>
-    </div>
+
+      {/* Rate this product */}
+      <div className="text-[0.94rem]">
+        <h2 className="text-1xl md:text-xl font-light mb-6 border-b border-white/20 pb-2 text-white/70">
+          Rate this product
+        </h2>
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-full">
+          {/* Stars */}
+          <div className="flex gap-2 mb-2">
+            {[1, 2, 3, 4, 5].map(star => (
+              <button
+                type="button"
+                key={star}
+                onClick={() => setRating(star)}
+                onMouseEnter={() => setHover(star)}
+                onMouseLeave={() => setHover(0)}
+                className={`text-2xl transition-colors ${
+                  star <= (hover || rating) ? "text-yellow-400" : "text-white/40"
+                }`}
+              >
+                ★
+              </button>
+            ))}
+          </div>
+
+          <textarea
+            placeholder="Comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            className="p-2 bg-white/5 text-white resize-none w-full border border-white/10 focus:border-white/30 focus:outline-none transition-all"
+          ></textarea>
+
+          <button
+            type="submit"
+            className="cursor-pointer px-5 py-2 border border-white/30 text-white/70 font-semibold text-sm hover:text-white hover:border-white/50 hover:backdrop-blur-sm transition-all w-max"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </section>
   );
 }
