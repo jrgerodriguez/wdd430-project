@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createNewUser } from "@/lib/users";
-import { supabase } from "@/lib/supabaseClient";
-import { User } from "@/types/user";
 import { hashPassword } from "@/lib/auth";
 import { findUserByEmail } from "@/lib/users";
 import { sign } from "jsonwebtoken";
@@ -10,7 +8,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password } = await request.json();
+    const { email, password, name } = await request.json();
 
     // 1. Check if email already exists
     const existingUser = await findUserByEmail(email);
@@ -26,6 +24,8 @@ export async function POST(request: NextRequest) {
     const newUser = {
     email: email,
     password: hashedPassword,
+    name: name,
+    role: "user" as const,
     };
 
     const createdUser = await createNewUser(newUser);

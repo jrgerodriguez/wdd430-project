@@ -31,9 +31,9 @@ export default function Hero() {
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                    {/* CHANGE THE COLOR TO TRY HAVE MORE CONTRAST */}
                     <Link
                         href="/marketplace"
-                        {/* CHANGE THE COLOR TO TRY HAVE MORE CONTRAST */}
                         className="px-6 py-3 rounded-lg bg-gradient-to-r from-blue-700 to-blue-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-blue-500 transition-all duration-300"
                     >
                         Explore Marketplace

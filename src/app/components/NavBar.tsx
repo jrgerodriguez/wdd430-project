@@ -37,9 +37,9 @@ export default function Navbar() {
         </nav>
 
         <div className="z-10 hidden lg:flex">
+          {/* CHANGE COLOR TO INCREASE CONTRAST */}
           <button
             onClick={handleLogout}
-            {/* CHANGE COLOR TO INCREASE CONTRAST */}
             className="cursor-pointer font-sans text-[0.94rem] text-white/80 hover:text-white/90 transition-colors duration-200"
           >
             Sign Out

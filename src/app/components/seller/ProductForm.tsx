@@ -2,7 +2,7 @@
 
 import { User } from "@/types/user";
 import { useState } from "react";
-import { Product } from "@/types/product";
+import { Product, Category, ALL_CATEGORIES } from "@/types/product";
 
 // Define the props for the component
 type Props = {
@@ -11,11 +11,11 @@ type Props = {
 };
 
 // ProductForm component
-export default function productForm({ user, onAddProduct }: Props) {
+export default function ProductForm({ user, onAddProduct }: Props) {
     const [isAdding, setIsAdding] = useState(false);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState<Category | "">(""); 
     const [price, setPrice] = useState<number | "">("");
     const [imageUrl, setImageUrl] = useState("");
     const [error, setError] = useState("");
@@ -37,7 +37,7 @@ export default function productForm({ user, onAddProduct }: Props) {
         setError("");
         try {
             // Call the onAddProduct prop to add the new product
-            await onAddProduct({ name, description, category, price: Number(price), image_url: imageUrl, seller_id: user.id });
+            await onAddProduct({ name, description, category: category as Category, price: Number(price), image_url: imageUrl, seller_id: user.id });
             setName("");
             setDescription("");
             setCategory("");
@@ -45,6 +45,7 @@ export default function productForm({ user, onAddProduct }: Props) {
             setImageUrl("");
         } catch (err) {
             setError("Failed to add product. Please try again.");
+            console.error(err);
         }
         // Set saving state to false after operation
         setIsSaving(false);
@@ -75,14 +76,21 @@ export default function productForm({ user, onAddProduct }: Props) {
                 disabled={isSaving}
             />
             {/* Category input field */}
-            <input
-                type="text"
+            {/* CHANGE FROM INPUT TO SELECT, DELETE TYPE AND PLACEHOLDER */}
+            <select
                 className="w-full p-2 border border-gray-300 rounded mb-2"
-                placeholder="Category"
                 value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => setCategory(e.target.value as Category | "")}
                 disabled={isSaving}
-            />
+            >
+                {/* ADD INITIAL OPTION */}
+                <option value="" disabled>Select Category</option>
+                {ALL_CATEGORIES.map((cat) => (
+                    <option key={cat} value={cat}>
+                        {cat}
+                    </option>
+                ))}
+            </select>
             {/* Price input field */}
             <input
                 type="number"

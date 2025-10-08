@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import MyToaster from "../ui/Toaster";
 
 export default function LoginForm() {
   const router = useRouter();

@@ -1,9 +1,13 @@
-export type Category =
-  | "Footwear"  
-  | "Home Decor"
-  | "Clothing"
-  | "Bags"
-  | "Jewelry";
+// CHANGE TO EXPORT FOR A SELECT ELEMENT
+
+export const ALL_CATEGORIES = [
+  "Footwear", 
+  "Home Decor", 
+  "Clothing", 
+  "Bags", 
+  "Jewelry"] as const;
+
+export type Category = typeof ALL_CATEGORIES[number];
 
 export interface Product {
   id: number;

@@ -26,6 +26,7 @@ export default function StoryForm({ user, onSave }: Props) {
             setIsEditing(false);
         } catch (err) {
             setError("Failed to save story. Please try again.");
+            console.error(err);
         }
         setIsSaving(false);
     };

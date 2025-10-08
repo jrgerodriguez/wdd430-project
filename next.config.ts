@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
-const nextConfig = {
+const NextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['mhtpdpxvrzsiobxggezu.supabase.co'],
   },
 };
 
-export default nextConfig;
+export default NextConfig;

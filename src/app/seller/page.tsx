@@ -74,13 +74,13 @@ export default async function SellersPage() {
     else
         return (
             <div className="min-h-screen bg-gradient-to-b from-purple-400 via-pink-500 to-red-500 text-white">
-    // Section for managing story and adding products
+                {/* Section for managing story and adding products */}
                 <section className="w-full flex flex-col items-center p-10 space-y-6">
                     <h1 className="text-4xl font-bold">Welcome, {user.name}</h1>
                     <StoryForm user={user} onSave={handleSaveStory} />
                     <ProductForm user={user} onAddProduct={handleAddProduct} />
                 </section>
-    // Section for displaying seller's products
+                {/* Section for displaying seller's products  */}
                 <section className="w-full flex justify-center p-10">
                     <SellerProductsDisplay user={user} />
                 </section>
