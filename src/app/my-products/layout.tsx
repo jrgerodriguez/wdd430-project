@@ -39,7 +39,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <div className="flex flex-col md:flex-row w-full max-w-6xl mx-auto md:gap-6 gap-0">
 
                 <aside className="w-full md:w-50 py-4">
-                    <ul className="list-none flex flex-col gap-4 font-sans text-[0.94rem] text-white/50">
+                    <ul className="list-none flex flex-col gap-4 font-sans text-[0.94rem] text-white/70">
                         <li className="md:p-2 rounded cursor-pointer w-full text-left">
                         <Link href="">My Products</Link>
                         </li>

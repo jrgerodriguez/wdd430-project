@@ -23,7 +23,7 @@ export default function SellerProductCard({p}: Props) {
 
 
               <div className="p-3 flex flex-col flex-[0_0_auto] text-white font-sans bg-white/5">
-                <p className="text-[0.65rem] sm:text-[0.7rem] tracking-widest uppercase text-white/50 mb-1">
+                <p className="text-[0.65rem] sm:text-[0.7rem] tracking-widest uppercase text-white/70 mb-1">
                   {p.category.replace("_", " ")}
                 </p>
 

@@ -1,0 +1,5 @@
+amber increse 200 in all code
+text-white/50 changed to text-white/70
+add a explicit text color for darkmode (use black to have contrast with white)
+text-gray-700 and text-gray-500 to text-white/70 in about page
+blue to green-400 in contact page

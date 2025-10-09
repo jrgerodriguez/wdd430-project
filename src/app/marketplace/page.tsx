@@ -42,7 +42,7 @@ export default function MarketplacePage() {
   return (
     <>
 
-      <div className="my-6 font-sans text-[0.94rem] text-white/50 flex flex-col md:flex-row justify-center items-center gap-6 text-center">
+      <div className="my-6 font-sans text-[0.94rem] text-white/70 flex flex-col md:flex-row justify-center items-center gap-6 text-center">
 
         <div className="relative w-40">
           <div

@@ -98,7 +98,7 @@ export default function LoginForm() {
       <div className="w-full">
         <button
           type="submit"
-          className="w-full py-2 rounded-md bg-gradient-to-r from-amber-600 to-amber-400 text-white hover:from-amber-500 hover:to-amber-300 transition-all shadow-md hover:shadow-lg cursor-pointer"
+          className="w-full py-2 rounded-md bg-gradient-to-r from-amber-800 to-amber-600 text-white hover:from-amber-700 hover:to-amber-500 transition-all shadow-md hover:shadow-lg cursor-pointer"
         >
           {loading ? "Signing in..." : "Sign in"}
         </button>

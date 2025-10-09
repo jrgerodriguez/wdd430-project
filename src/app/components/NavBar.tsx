@@ -27,7 +27,7 @@ export default function Navbar() {
         </div>
 
         <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2">
-          <ul className="flex gap-10 font-sans text-[0.94rem] text-white/50 ">
+          <ul className="flex gap-10 font-sans text-[0.94rem] text-white/70 ">
             <li><Link href="/marketplace">Marketplace</Link></li>
             <li><Link href="/my-products">My Products</Link></li>
             <li><Link href="/about">About</Link></li>
@@ -38,7 +38,7 @@ export default function Navbar() {
         <div className="z-10 hidden lg:flex">
           <button
             onClick={handleLogout}
-            className="cursor-pointer font-sans text-[0.94rem] text-white/50 hover:text-white/90 transition-colors duration-200"
+            className="cursor-pointer font-sans text-[0.94rem] text-white/70 hover:text-white/90 transition-colors duration-200"
           >
             Sign Out
           </button>
@@ -59,7 +59,7 @@ export default function Navbar() {
         ${isOpen ? "max-h-96" : "max-h-0"}`}
       >
         <nav className="shadow-md border-t border-gray-300">
-          <ul className="flex flex-col items-start gap-4 pl-6 py-4 font-sans text-[0.94rem] text-white/50">
+          <ul className="flex flex-col items-start gap-4 pl-6 py-4 font-sans text-[0.94rem] text-white/70">
             <li><Link href="/marketplace" onClick={() => setIsOpen(false)}>Marketplace</Link></li>
             <li><Link href="/seller/products" onClick={() => setIsOpen(false)}>My Products</Link></li>
             <li><Link href="/about" onClick={() => setIsOpen(false)}>About</Link></li>

@@ -43,10 +43,11 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
   return(
     <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full max-w-md mx-auto px-4 sm:px-0 font-sans">
 
-      {/* First Name */}
+      {/* First Name 
+      CHANGE EMAIL TO FIRST NAME*/}
       <div className="flex flex-col w-full">
         <label htmlFor="email" className="mb-2 text-left text-white text-sm font-thin tracking-wide">
-          Email
+          First Name
         </label>
         <input
           type="text"
@@ -60,10 +61,11 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
         />
       </div>
 
-      {/* Last Name */}
+      {/* Last Name 
+      CHANGE EMAIL TO LAST NAME*/}
       <div className="flex flex-col w-full">
         <label htmlFor="email" className="mb-2 text-left text-white text-sm font-thin tracking-wide">
-          Email
+          Last Name
         </label>
         <input
           type="text"
@@ -130,7 +132,7 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
       <div className="w-full">
         <button
           type="submit"
-          className="w-full py-2 rounded-md bg-gradient-to-r from-amber-600 to-amber-400 text-white hover:from-amber-500 hover:to-amber-300 transition-all shadow-md hover:shadow-lg cursor-pointer "
+          className="w-full py-2 rounded-md bg-gradient-to-r from-amber-800 to-amber-600 text-white hover:from-amber-700 hover:to-amber-500 transition-all shadow-md hover:shadow-lg cursor-pointer "
         >
           {loading ? "Creating..." : "Register"}
         </button>

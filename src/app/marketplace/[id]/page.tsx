@@ -26,7 +26,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
                 <div className="p-6 flex flex-col justify-between text-white font-sans">
                     <div>
-                        <p className="text-[0.65rem] sm:text-[0.7rem] tracking-widest uppercase text-white/50 mb-2">
+                        <p className="text-[0.65rem] sm:text-[0.7rem] tracking-widest uppercase text-white/70 mb-2">
                             {product.category.replace("_", " ")}
                         </p>
 
