@@ -61,7 +61,7 @@ export default function Navbar() {
         <nav className="shadow-md border-t border-gray-300">
           <ul className="flex flex-col items-start gap-4 pl-6 py-4 font-sans text-[0.94rem] text-white/50">
             <li><Link href="/marketplace" onClick={() => setIsOpen(false)}>Marketplace</Link></li>
-            <li><Link href="/seller/products" onClick={() => setIsOpen(false)}>My Products</Link></li>
+            <li><Link href="/my-products" onClick={() => setIsOpen(false)}>My Products</Link></li>
             <li><Link href="/about" onClick={() => setIsOpen(false)}>About</Link></li>
             <li><Link href="/contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
             <li><span onClick={handleLogout}>Log Out</span></li>
