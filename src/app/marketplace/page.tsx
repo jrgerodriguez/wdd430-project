@@ -8,7 +8,7 @@ import ProductCard from "../components/marketplace/ProductCard";
 export default function MarketplacePage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [categoryFilter, setCategoryFilter] = useState<Category | "all">("all");
+  const [categoryFilter, setCategoryFilter] = useState<Category | "All Products">("All Products");
   const [maxPriceFilter, setMaxPriceFilter] = useState<number | "">("");
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -26,7 +26,7 @@ export default function MarketplacePage() {
   useEffect(() => {
     let filtered = [...products];
 
-    if (categoryFilter !== "all") {
+    if (categoryFilter !== "All Products") {
       filtered = filtered.filter(p => p.category === categoryFilter);
     }
 
@@ -37,7 +37,7 @@ export default function MarketplacePage() {
     setFilteredProducts(filtered);
   }, [categoryFilter, maxPriceFilter, products]);
 
-  const categories = ["Footwear", "Home Decor", "Clothing", "Bags", "Jewelry"];
+  const categories = ["All Products", "Footwear", "Home Decor", "Clothing", "Bags", "Jewelry"];
 
   return (
     <>
@@ -49,7 +49,7 @@ export default function MarketplacePage() {
             className="px-4 py-2 bg-white/10 text-white cursor-pointer flex justify-between items-center transition hover:bg-white/20"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
-            {categoryFilter === "all" ? "All Categories" : categoryFilter}
+            {categoryFilter === "All Products" ? "All Categories" : categoryFilter}
             <svg
               className="w-4 h-4 transition-transform"
               style={{ transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}
@@ -85,7 +85,7 @@ export default function MarketplacePage() {
           <input
             type="number"
             id="max-price"
-            className="px-3 py-2 bg-white/10 text-white placeholder-white focus:outline-none focus:bg-white/20 transition w-24 text-center text-[0.94rem]"
+            className="px-3 py-2 bg-white/10 text-white placeholder-white focus:outline-none focus:bg-white/20 transition w-24 text-center text-[0.94rem] "
             value={maxPriceFilter}
             onChange={(e) => setMaxPriceFilter(e.target.value === "" ? "" : Number(e.target.value))}
           />
