@@ -20,7 +20,7 @@ export default function Navbar() {
   return (
     <>
       <header className="w-full px-6 py-6 flex items-center justify-between relative bg-transparent">
-        <div className="text-xl font-bold z-10 font-sans">
+        <div className="text-xl font-bold z-10 font-sans text-white">
           <Link href="/home">
             <span className="text-3xl">H</span>ancrafted<span className="text-3xl">H</span>aven
           </Link>

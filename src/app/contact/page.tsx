@@ -70,7 +70,7 @@ const ContactPage: React.FC = () => {
               />
               <button
                 type="submit"
-                className="bg-green-600 hover:bg-green-400 text-white py-3 rounded-lg font-medium transition"
+                className="bg-green-800 hover:bg-green-600 text-white py-3 rounded-lg font-medium transition"
               >
                 Send Message
               </button>
