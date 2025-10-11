@@ -16,7 +16,7 @@ export default function MarketplacePage() {
   useEffect(() => {
     async function fetchProducts() {
       const allProducts = await getAllProducts();
-      console.log("Produtos recebidos:", allProducts);
+      // console.log("Produtos recebidos:", allProducts);
       setProducts(allProducts);
       setFilteredProducts(allProducts);
     }

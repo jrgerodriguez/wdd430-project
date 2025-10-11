@@ -1,10 +1,10 @@
 import '@/app/globals.css';
 import Navbar from '../components/NavBar';
 import Footer from '../components/Footer';
-import Link from 'next/link';
 import { verifyToken } from '@/lib/jwt';
 import { cookies } from 'next/headers';
 import { JwtPayloadCustom } from '@/types/jwt';
+import SideBar from '../components/my-products/SideBar';
 
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -22,11 +22,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     }
 
     const payload = verified as JwtPayloadCustom;
-    console.log(payload)
+    // console.log(payload)
 
     const first_name = payload.first_name ?? "Seller";
 
-    console.log(payload)
+    // console.log(payload)
 
     return (
     <>
@@ -38,16 +38,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </h1>
             <div className="flex flex-col md:flex-row w-full max-w-6xl mx-auto md:gap-6 gap-0">
 
-                <aside className="w-full md:w-50 py-4">
-                    <ul className="list-none flex flex-col gap-4 font-sans text-[0.94rem] text-white/70">
-                        <li className="md:p-2 rounded cursor-pointer w-full text-left">
-                        <Link href="">My Products</Link>
-                        </li>
-                        <li className="md:p-2 rounded cursor-pointer w-full text-left">
-                        <Link href="add">Add New Product</Link>
-                        </li>
-                    </ul>
-                </aside>
+            <SideBar />
 
                 <main className="flex-1 py-5 md:pt-5 pt-0">
                 {children}
