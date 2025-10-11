@@ -24,3 +24,7 @@ export interface Rating {
   comment?: string;
   created_at?: string;
 }
+
+export type NewProduct = Required<
+  Omit<Product, "id" | "averageRating" | "ratings">
+>;
