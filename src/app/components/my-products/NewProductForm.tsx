@@ -47,6 +47,7 @@ export default function AddNewProductForm({ sellerId }: AddNewProductFormProps) 
 
         if (!photo) {
             toast.error("Please upload a photo.");
+            setLoading(false);
             return;
         }
 

@@ -84,7 +84,7 @@ export default function SellerProductCard({p}: Props) {
                   <div className="flex flex-wrap gap-2 w-full sm:w-auto">
 
                   <Link
-                    href={`/edit-product/${p.id}`}
+                    href={`/my-products/edit/${p.id}`}
                     className="flex-1 min-w-[70px] sm:min-w-[100px] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-green-300 text-green-300 font-light text-[0.7rem] sm:text-[0.8rem] hover:border-green-400 hover:text-green-400 transition-all tracking-wide text-center"
                   >
                     Edit
@@ -92,7 +92,7 @@ export default function SellerProductCard({p}: Props) {
 
                   <button
                     onClick={() => setShowDeleteModal(true)}
-                    className="flex-1 min-w-[70px] sm:min-w-[100px] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-white/70 text-white/70 font-light text-[0.7rem] sm:text-[0.8rem] hover:border-white/90 hover:text-white/90 transition-all tracking-wide text-center"
+                    className="flex-1 min-w-[70px] sm:min-w-[100px] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-white/70 text-white/70 font-light text-[0.7rem] sm:text-[0.8rem] hover:border-white/90 hover:text-white/90 transition-all tracking-wide text-center cursor-pointer"
                     >
                     Delete
                   </button>

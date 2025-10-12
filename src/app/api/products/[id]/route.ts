@@ -23,22 +23,20 @@ export async function DELETE(
 // ✅ PUT - Update product by ID
 export async function PUT(
   req: NextRequest,
-   context: { params: Promise<{ id: string }> }
+   {params}: { params: { id: string } }
 ) {
-  const { id } = await context.params;
+  const { id } = params;
   const body = await req.json();
 
-  const { name, description, price, image_url, category } = body;
+  const { name, description, category, price } = body;
 
   const { error } = await supabase
-    .from("products")
+    .from("product")
     .update({
       name,
       description,
-      price,
-      image_url,
       category,
-      updated_at: new Date().toISOString(),
+      price,
     })
     .eq("id", id);
 
