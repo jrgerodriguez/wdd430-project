@@ -23,7 +23,7 @@ export async function DELETE(
 // ✅ PUT - Update product by ID
 export async function PUT(
   req: NextRequest,
-   {params}: { params: { id: string } }
+   {params}: { params: { id: number } }
 ) {
   const { id } = params;
   const body = await req.json();
