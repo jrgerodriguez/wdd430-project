@@ -8,7 +8,15 @@ type Props = {
 }
 
 export default async function ProductDetailPage({ params }: Props) {
-    const product: Product = await getProductById(Number(params.id));
+    const product = await getProductById(Number(params.id));
+
+    if (!product) {
+    return (
+        <div className="text-center mt-10 text-xl text-white">
+        Product not found
+        </div>
+    );
+    }
 
     return (
         <section className="max-w-5xl mx-auto p-6">
