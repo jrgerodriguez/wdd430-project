@@ -26,8 +26,8 @@ export async function PUT(req: NextRequest, context: { params: Promise<{ id: str
 }
 
 // ✅ DELETE
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-  const { id } = params;
+export async function DELETE(req: Request, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
 
   const { error } = await supabase
     .from("product")
