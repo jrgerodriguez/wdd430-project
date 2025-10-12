@@ -1,25 +1,6 @@
 import { supabase } from '@/lib/supabaseClient';
 import { NextRequest, NextResponse } from 'next/server';
 
-// ✅ DELETE - Delete product by ID
-export async function DELETE(
-  req: NextRequest,
-  context: { params: Promise<{ id: string }> }
-) {
-  const { id } = await context.params;
-
-  const { error } = await supabase
-    .from('products')
-    .delete()
-    .eq('id', id);
-
-  if (error) {
-    return NextResponse.json({ error: 'Error deleting the product.' }, { status: 500 });
-  }
-
-  return NextResponse.json({ message: 'Product deleted successfully!' }, { status: 200 });
-}
-
 // ✅ PUT - Update product by ID
 export async function PUT(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
@@ -44,22 +25,18 @@ export async function PUT(req: NextRequest, context: { params: Promise<{ id: str
   return NextResponse.json({ message: "Product updated successfully." });
 }
 
-// ✅ GET - Fetch product by ID
-export async function GET(
-  req: NextRequest,
-   context: { params: Promise<{ id: string }> }
-) {
+// ✅ DELETE
+export async function DELETE(req: Request, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
 
-  const { data, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("id", id)
-    .single();
+  const { error } = await supabase
+    .from("product")
+    .delete()
+    .eq("id", Number(id));
 
-  if (error || !data) {
-    return NextResponse.json({ error: error?.message || "Product not found" }, { status: 404 });
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json(data);
+  return NextResponse.json({ message: "Product deleted successfully" }); // ✅ Siempre JSON
 }
