@@ -12,7 +12,11 @@ export default function SideBar() {
             <ul className="list-none flex flex-col gap-4 font-sans text-[0.94rem] text-white/70">
                 <li>
                 <Link href="/my-products"
-                className={`md:p-2 rounded cursor-pointer w-full text-left ${pathname === '/my-products' ? 'text-emerald-400' : ''}`}
+                    className={`md:p-2 rounded cursor-pointer w-full text-left ${
+                    pathname === '/my-products' || pathname.startsWith('/my-products/edit')
+                        ? 'text-emerald-400'
+                        : ''
+                    }`}
                 >
                     My Products</Link>
                 </li>

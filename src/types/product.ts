@@ -28,3 +28,7 @@ export interface Rating {
 export type NewProduct = Required<
   Omit<Product, "id" | "averageRating" | "ratings">
 >;
+
+export type EditProduct = Required<
+  Omit<Product, "averageRating" | "ratings" | "image_url" | "seller_id">
+>;
