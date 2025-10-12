@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import type { NewProduct } from "@/types/product";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface AddNewProductFormProps {
   sellerId: number;
 }
 
 export default function AddNewProductForm({ sellerId }: AddNewProductFormProps) {
+    const router = useRouter();
 
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
@@ -89,6 +91,7 @@ export default function AddNewProductForm({ sellerId }: AddNewProductFormProps) 
 
             toast.success("New Product Successfully Added!");
             setName(""); setDescription(""); setCategory(""); setPrice(""); setPhoto(null);
+            router.push("/my-products");
         } catch (err) {
             console.error("Error:", err);
             toast.error("There was an error when adding the new product.");
