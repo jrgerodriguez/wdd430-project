@@ -1,10 +1,40 @@
 "use client";
 
-import React, { useState } from "react";
+// ADD IMPORT USEEFFECT
+import React, { useState, useEffect } from "react";
+// ADD IMPORT FOR LEAFLET MAP
+import "leaflet/dist/leaflet.css";
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  // STATE TO TRACK IF MAP IS READY
+  const [mapReady, setMapReady] = useState(false);
+
+  // INITIALIZE MAP IN USEEFFECT
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    import("leaflet").then((L) => {
+      const map = L.map("map").setView([21.306944, -157.858333], 13);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(map);
+
+      L.marker([21.306944, -157.858333])
+        .addTo(map)
+        .bindPopup("Honolulu, HI")
+        .openPopup();
+
+      setMapReady(true);
+
+      return () => {
+        map.remove();
+      };
+    });
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -77,8 +107,23 @@ const ContactPage: React.FC = () => {
             </form>
           </div>
 
-
-          <div className="rounded-2xl overflow-hidden border border-gray-400 shadow-lg">
+          {/* REPLACE GOOGLE MAPS BY LEAFLET MAP */}
+          <div className="relative rounded-2xl overflow-hidden border-2 border-gray-600 shadow-lg w-full aspect-[2/2] min-h-[300px] bg-gray-800">
+            {!mapReady && (
+              <img
+                src="https://staticmap.openstreetmap.de/staticmap.php?center=21.306944,-157.858333&zoom=13&size=600x400&maptype=mapnik"
+                alt="Map showing location in Honolulu Hawaii"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            )}
+            <div 
+              id="map" 
+              className="absolute inset-0 w-full h-full"
+              style={{ backgroundColor: 'transparent' }}
+              role="region"
+              aria-label="Interactive map of Honolulu location"
+            />
+            {/*
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.0043578019647!2d-157.858333!3d21.306944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c006e5a6e68eaa1%3A0x1f10ebc1e9156f1f!2sHonolulu%2C%20HI!5e0!3m2!1sen!2sus!4v1695600000000!5m2!1sen!2sus"
               width="100%"
@@ -88,6 +133,7 @@ const ContactPage: React.FC = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
+            */}
           </div>
         </section>
 

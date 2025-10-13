@@ -47,6 +47,8 @@ export default function Navbar() {
         <button
           className="lg:hidden flex flex-col gap-1 z-10"
           onClick={() => setIsOpen(!isOpen)}
+          // Add a descriptive aria-label
+        aria-label={isOpen ? "Close Menu" : "Open Menu"}
         >
           <span className="w-6 h-0.5 bg-white"></span>
           <span className="w-6 h-0.5 bg-white"></span>

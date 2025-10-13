@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <div className="flex flex-col min-h-screen">
         <Navbar />
         <div className="min-h-screen px-6 py-5">
-            <h1 className="text-3xl font-semibold tracking-wide font-sans text-center">
+            <h1 className="text-3xl font-semibold tracking-wide font-sans text-center" text-white>
                 Hello, <span className="text-emerald-400">{first_name}</span>.
             </h1>
             <div className="flex flex-col md:flex-row w-full max-w-6xl mx-auto md:gap-6 gap-0">

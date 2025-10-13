@@ -11,3 +11,12 @@ v 2
 global foreground change to black
 explicit change what was using white from foreground to be white in Nav, contact page and about page
 green of contact button increase in 300
+
+v 3
+
+global foreground change to black
+change hello in my products page to be explicit white
+background of description textarea changed to black
+add discernible names to social media buttons
+add accessible name for nav button
+create css for map

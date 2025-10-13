@@ -77,7 +77,7 @@ export default function EditProductForm({product}: EditProductFormProps) {
                     </div>
 
                     <div className="flex flex-col w-full mb-4">
-                        <label htmlFor="description" className="mb-2 text-left tracking-wide text-white/80 text-[0.94rem] font-thin">
+                        <label htmlFor="description" className="mb-2 text-left tracking-wide text-white/80 text-[0.94rem] font-thin" bg-white>
                             Description
                         </label>
                         <textarea
