@@ -5,6 +5,7 @@ const teamMembers = [
   { name: "Soraya", role: "Founder & CEO", bio: "Passionate about connecting buyers and sellers." },
   { name: "Jorge", role: "Engineer", bio: "Building a safe and scalable platform." },
   { name: "Gabriel ", role: "Community Manager", bio: "Ensuring everyone has a great marketplace experience." },
+  { name: "Gerald ", role: "Product Manager", bio: "Certifies that each product being sold by the sellers is of the highest calibre." },
 ];
 
 const About: React.FC = () => {
@@ -24,11 +25,18 @@ const About: React.FC = () => {
           Our mission is to empower individuals to trade with confidence. We ensure transparency, 
           community support, and fair reviews to make every transaction smooth and reliable.
         </p>
+          <div>
+      <img
+        src="/images/about.JPG"
+        alt="Handmade"
+        className="w-full rounded-xl shadow-md object-cover h-60 md:h-80"
+      />
+  </div>
       </section>
 
       <section>
         <h2 className="text-3xl font-semibold mb-8 text-center text-white">Meet the Team</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {teamMembers.map((member) => (
             <div key={member.name} className="p-6 border rounded-lg text-center hover:shadow-lg transition">
               <h3 className="text-xl font-bold text-white">{member.name}</h3>
@@ -41,6 +49,11 @@ const About: React.FC = () => {
 
       <section className=" p-8 rounded-lg text-white">
         <h2 className="text-3xl font-semibold mb-4 text-center">What Users Say</h2>
+        <img
+            src="/images/5.webp"
+            alt="5 Stars"
+            className="mx-auto mb-6 w-24 h-auto"
+        />
         <div className="flex flex-col md:flex-row gap-6 justify-center">
           <blockquote className="border-l-4 border-blue-500 pl-4 italic">
             I love this marketplace! I can buy and sell safely with trusted reviews.
